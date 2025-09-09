@@ -1,4 +1,4 @@
-name: Python CI
+name: Python CI and Publish
 
 on: [push,workflow_dispatch]
 
@@ -41,14 +41,14 @@ jobs:
     needs: PythonVersionSetup
     steps:
     # copy the setup steps except Run Tests from previous job
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: builds
+          path: my_package/dist/
       - name: Publish
         working-directory: my_package
         run: |
           poetry config repositories.cspark https://gitlab.com/api/v4/projects/61532089/packages/pypi
           poetry config http-basic.cspark cspark_user ${{ secrets.PYPI_TOKEN }}
           poetry publish -r cspark
-      - name: Download Build Artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: builds
-          path: my_package/dist/

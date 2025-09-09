@@ -1,4 +1,4 @@
-from app import app
+from appjackl import appjackl
 
 def test_add():
-    assert app.add(1,1) == 2
+    assert appjackl.add(1,1) == 2

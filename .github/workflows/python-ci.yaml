@@ -29,7 +29,6 @@ jobs:
         working-directory: my_package
         run: poetry build
 
-jobs:
   PublishPackage:
     run-on: ubuntu-latest
     steps:
